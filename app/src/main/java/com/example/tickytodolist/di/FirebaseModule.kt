@@ -1,7 +1,5 @@
 package com.example.tickytodolist.di
 
-import com.example.tickytodolist.data.repository.AuthRepositoryImpl
-import com.example.tickytodolist.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -11,11 +9,20 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+object FirebaseModule {
 
     @Provides
     @Singleton
-    fun provideMyRepository(firebaseAuth: FirebaseAuth): AuthRepository {
-        return AuthRepositoryImpl(firebaseAuth)
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
     }
+
+//    @Provides
+//    @Singleton
+//    fun provideFirebaseDatabase(): FirebaseDatabase {
+//        return FirebaseDatabase.getInstance()
+//    }
+
+
+
 }

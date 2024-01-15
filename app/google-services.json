@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "505165399457",
+    "project_id": "tickytodolist",
+    "storage_bucket": "tickytodolist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505165399457:android:2ce32803cd8fbc126eb7e0",
+        "android_client_info": {
+          "package_name": "com.example.tickytodolist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlIlYXAEWefMxhlZL_M2g3VA0Lvr6ePKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

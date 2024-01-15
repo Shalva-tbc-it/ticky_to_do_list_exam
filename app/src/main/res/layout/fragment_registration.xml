@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".presentation.screen.registration.RegistrationFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_arrow_back" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="230dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/splash_cat" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/registration"
+        android:textColor="@color/black"
+        android:textSize="28sp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edNickName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ed_text_corner"
+        android:fontFamily="@font/ubuntu"
+        android:hint="@string/nickname"
+        android:padding="10dp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ed_text_corner"
+        android:fontFamily="@font/ubuntu"
+        android:hint="@string/password"
+        android:padding="10dp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ed_text_corner"
+        android:fontFamily="@font/ubuntu"
+        android:hint="@string/nickname"
+        android:padding="10dp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edRepeatPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ed_text_corner"
+        android:fontFamily="@font/ubuntu"
+        android:hint="@string/password"
+        android:padding="10dp"
+        android:textColor="@color/black" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/ubuntu"
+        android:text="@string/registration"
+        android:textSize="20sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
