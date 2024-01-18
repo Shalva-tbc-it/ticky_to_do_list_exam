@@ -34,24 +34,13 @@
         android:textSize="28sp" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edNickName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/ed_text_corner"
-        android:fontFamily="@font/ubuntu"
-        android:hint="@string/nickname"
-        android:padding="10dp"
-        android:textColor="@color/black" />
-
-    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/ed_text_corner"
         android:fontFamily="@font/ubuntu"
-        android:hint="@string/password"
+        android:hint="@string/email"
         android:padding="10dp"
         android:textColor="@color/black" />
 
@@ -62,7 +51,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/ed_text_corner"
         android:fontFamily="@font/ubuntu"
-        android:hint="@string/nickname"
+        android:hint="@string/password"
         android:padding="10dp"
         android:textColor="@color/black" />
 
@@ -73,16 +62,37 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/ed_text_corner"
         android:fontFamily="@font/ubuntu"
-        android:hint="@string/password"
+        android:hint="@string/repeat_password"
         android:padding="10dp"
         android:textColor="@color/black" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegistration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu"
         android:text="@string/registration"
         android:textSize="20sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvGoToLogin"
+        android:layout_width="wrap_content"
+        android:text="@string/log_in"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textSize="28sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

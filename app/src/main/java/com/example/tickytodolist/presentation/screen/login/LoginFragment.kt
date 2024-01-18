@@ -1,11 +1,17 @@
 package com.example.tickytodolist.presentation.screen.login
 
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import com.example.tickytodolist.data.common.Resource
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.tickytodolist.databinding.FragmentLoginBinding
 import com.example.tickytodolist.presentation.base.BaseFragment
+import com.example.tickytodolist.presentation.event.login.LoginNavigationEvent
+import com.example.tickytodolist.presentation.event.login.OnEvent
+import com.example.tickytodolist.presentation.state.AuthState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -20,31 +26,63 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     override fun bindViewActionListeners() {
-        binding.apply {
-            btnLogIn.setOnClickListener {
-                viewModel.loginUser(email = "${edNickName.text}", password = "${edPassword.text}")
-            }
-        }
+        listener()
     }
 
     override fun bindObserves() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.loginResult.collect {
-                when(it) {
-                    is Resource.Success -> {
-                        Toast.makeText(requireContext(), it.data.token, Toast.LENGTH_LONG).show()
-                    }
-                    is Resource.Error -> {
-                        Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_LONG).show()
-                    }
-                    is Resource.Loading -> {
-                        Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG).show()
-                    }
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.logInState.collect {
+                    logInState(logInState = it)
                 }
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiEvent.collect {
+                    navigationEvents(event = it)
+                }
+            }
+        }
     }
 
+    private fun listener() = with(binding) {
+        btnLogIn.setOnClickListener {
+            viewModel.onEvent(
+                OnEvent.Login(
+                    edEmail.text.toString(),
+                    edPassword.text.toString()
+                )
+            )
+        }
+        tvGoToReg.setOnClickListener {
+            viewModel.navigateToRegister()
+        }
+    }
 
+    private fun logInState(logInState: AuthState) {
+        with(binding) {
+            progressBar.visibility =
+                if (logInState.isLoading) View.VISIBLE else View.GONE
+
+            logInState.errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                viewModel.onEvent(OnEvent.ResetErrorMessage)
+            }
+        }
+    }
+
+    private fun navigationEvents(event: LoginNavigationEvent) {
+        when (event) {
+            is LoginNavigationEvent.NavigateToHome -> {
+                Toast.makeText(requireContext(), "Success Login", Toast.LENGTH_LONG).show()
+//                go to home fragment
+            }
+
+            is LoginNavigationEvent.NavigateToRegister -> {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegistrationFragment())
+            }
+        }
+    }
 }

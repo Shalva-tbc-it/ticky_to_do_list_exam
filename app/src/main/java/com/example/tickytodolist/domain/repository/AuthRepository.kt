@@ -1,10 +1,10 @@
 package com.example.tickytodolist.domain.repository
 
 import com.example.tickytodolist.data.common.Resource
-import com.example.tickytodolist.data.model.AuthResultWithToken
-import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    suspend fun registerUser(email: String, password: String): Resource<AuthResult>
-    suspend fun loginUser(email: String, password: String): Resource<AuthResultWithToken>
+    suspend fun login(email: String, password: String): Flow<Resource<FirebaseUser>>
+    suspend fun register(email: String, password: String): Flow<Resource<FirebaseUser>>
 }

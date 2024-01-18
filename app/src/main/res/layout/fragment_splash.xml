@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
     android:background="@color/main_bg"
     android:orientation="vertical"
     tools:context=".presentation.screen.splash.SplashFragment">
@@ -31,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:text="@string/i_know_you_ve_got_many_things_to_do_but_i_m_here_to_help_you_organize"
+        android:text="@string/splash_text"
         android:textAlignment="center"
         android:fontFamily="@font/ubuntu"
         android:textColor="@color/black"
