@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tickytodolist.databinding.FragmentLoginBinding
-import com.example.tickytodolist.presentation.base.BaseFragment
+import com.example.tickytodolist.presentation.common.base.BaseFragment
 import com.example.tickytodolist.presentation.event.login.LoginNavigationEvent
 import com.example.tickytodolist.presentation.event.login.OnEvent
 import com.example.tickytodolist.presentation.state.AuthState
@@ -76,8 +76,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun navigationEvents(event: LoginNavigationEvent) {
         when (event) {
             is LoginNavigationEvent.NavigateToHome -> {
-                Toast.makeText(requireContext(), "Success Login", Toast.LENGTH_LONG).show()
-//                go to home fragment
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                )
             }
 
             is LoginNavigationEvent.NavigateToRegister -> {

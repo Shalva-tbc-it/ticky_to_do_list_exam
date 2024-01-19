@@ -1,4 +1,4 @@
-package com.example.tickytodolist.presentation.base
+package com.example.tickytodolist.presentation.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

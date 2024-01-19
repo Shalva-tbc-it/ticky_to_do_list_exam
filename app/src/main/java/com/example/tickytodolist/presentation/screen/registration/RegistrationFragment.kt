@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tickytodolist.databinding.FragmentRegistrationBinding
-import com.example.tickytodolist.presentation.base.BaseFragment
+import com.example.tickytodolist.presentation.common.base.BaseFragment
 import com.example.tickytodolist.presentation.event.registration.OnEvent
 import com.example.tickytodolist.presentation.event.registration.RegNavigationEvent
 import com.example.tickytodolist.presentation.state.AuthState

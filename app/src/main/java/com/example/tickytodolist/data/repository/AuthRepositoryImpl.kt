@@ -21,7 +21,6 @@ class AuthRepositoryImpl @Inject constructor(
     ): Flow<Resource<FirebaseUser>> {
         return handleFirebaseResponse.apiCall {
             firebaseAuth.signInWithEmailAndPassword(email, password).await()
-
         }
     }
 

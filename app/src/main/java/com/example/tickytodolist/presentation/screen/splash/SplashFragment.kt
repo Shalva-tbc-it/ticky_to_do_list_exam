@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tickytodolist.databinding.FragmentSplashBinding
-import com.example.tickytodolist.presentation.base.BaseFragment
+import com.example.tickytodolist.presentation.common.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
