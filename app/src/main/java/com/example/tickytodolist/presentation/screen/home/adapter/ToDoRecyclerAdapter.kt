@@ -11,24 +11,42 @@ import com.example.tickytodolist.presentation.model.Task
 class ToDoRecyclerAdapter: ListAdapter<Task, ToDoRecyclerAdapter.ToDoViewHolder>(
     UserListDiffCallback()
 ) {
+
+    private var onItemClickListener: ((Task) -> Unit)? = null
+
     inner class ToDoViewHolder(private val binding: RecyclerTaskBinding): RecyclerView.ViewHolder(binding.root) {
+
         fun bind() = with(binding) {
             val task = currentList[adapterPosition]
 
             tvTask.text = task.title
             tvDate.text = task.date
+        }
 
+        fun taskUpdateDelete() {
+            val task = currentList[adapterPosition]
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it.invoke(task)
+                }
+            }
         }
     }
 
+
+
     class UserListDiffCallback : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.userId == newItem.userId
         }
 
         override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem == newItem
         }
+    }
+
+    fun setOnItemClickListener(listener: (Task) -> Unit) {
+        onItemClickListener = listener
     }
 
 
@@ -44,5 +62,6 @@ class ToDoRecyclerAdapter: ListAdapter<Task, ToDoRecyclerAdapter.ToDoViewHolder>
 
     override fun onBindViewHolder(holder: ToDoViewHolder, position: Int) {
         holder.bind()
+        holder.taskUpdateDelete()
     }
 }

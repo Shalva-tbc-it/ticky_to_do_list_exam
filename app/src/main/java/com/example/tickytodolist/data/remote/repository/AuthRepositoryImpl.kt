@@ -1,4 +1,4 @@
-package com.example.tickytodolist.data.repository
+package com.example.tickytodolist.data.remote.repository
 
 import com.example.tickytodolist.data.common.HandleFirebaseResponse
 import com.example.tickytodolist.data.common.Resource

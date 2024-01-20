@@ -39,6 +39,13 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun navigationEvent(event: LoginNavigationEvent) {
+        when (event) {
+            is LoginNavigationEvent.NavigateToRegister -> navigateToRegister()
+            is LoginNavigationEvent.NavigateToHome -> navigateToHome()
+        }
+    }
+
     private fun login(email: String, password: String) {
         viewModelScope.launch {
             logInUseCase(email, password).collect { resource ->
@@ -86,8 +93,12 @@ class LoginViewModel @Inject constructor(
     }
 
 
-
-    fun navigateToRegister() {
+    private fun navigateToHome() {
+        viewModelScope.launch {
+            _uiEvent.emit(LoginNavigationEvent.NavigateToHome)
+        }
+    }
+    private fun navigateToRegister() {
         viewModelScope.launch {
             _uiEvent.emit(LoginNavigationEvent.NavigateToRegister)
         }

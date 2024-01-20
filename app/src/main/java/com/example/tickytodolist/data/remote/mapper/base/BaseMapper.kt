@@ -1,4 +1,4 @@
-package com.example.tickytodolist.data.mapper.base
+package com.example.tickytodolist.data.remote.mapper.base
 
 import com.example.tickytodolist.data.common.Resource
 import kotlinx.coroutines.flow.Flow

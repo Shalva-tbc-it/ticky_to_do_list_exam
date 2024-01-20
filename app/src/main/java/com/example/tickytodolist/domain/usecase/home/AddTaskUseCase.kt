@@ -1,6 +1,6 @@
 package com.example.tickytodolist.domain.usecase.home
 
-import com.example.tickytodolist.data.model.TaskDTO
+import com.example.tickytodolist.data.remote.model.TaskDTO
 import com.example.tickytodolist.domain.repository.TaskRepository
 import javax.inject.Inject
 

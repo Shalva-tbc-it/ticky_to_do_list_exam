@@ -1,11 +1,15 @@
 package com.example.tickytodolist.di
 
-import com.example.tickytodolist.data.repository.AuthRepositoryImpl
-import com.example.tickytodolist.data.repository.FirebaseTaskRepositoryImpl
-import com.example.tickytodolist.data.repository.GetTaskRepositoryImpl
+import com.example.tickytodolist.data.local.repository.LocalConnectionRepositoryImpl
+import com.example.tickytodolist.data.remote.repository.AuthRepositoryImpl
+import com.example.tickytodolist.data.remote.repository.FirebaseTaskRepositoryImpl
+import com.example.tickytodolist.data.remote.repository.GetTaskRepositoryImpl
+import com.example.tickytodolist.data.remote.repository.InteractionRepositoryImpl
 import com.example.tickytodolist.domain.repository.AuthRepository
 import com.example.tickytodolist.domain.repository.GetTaskRepository
+import com.example.tickytodolist.domain.repository.InteractionRepository
 import com.example.tickytodolist.domain.repository.TaskRepository
+import com.example.tickytodolist.domain.repository.local.LocalConnectionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,17 +32,28 @@ object RepositoryModule {
         return taskRepository
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideFirebaseUserRepository(userRepository: FirebaseUserRepositoryImpl): UserRepository {
-//        return userRepository
-//    }
+    @Singleton
+    @Provides
+    fun provideFirebaseUserRepository(interactionRepositoryImpl: InteractionRepositoryImpl): InteractionRepository {
+        return interactionRepositoryImpl
+    }
 
     @Singleton
     @Provides
     fun provideFirebaseGetTaskRepository(getTaskRepositoryImpl: GetTaskRepositoryImpl): GetTaskRepository {
         return getTaskRepositoryImpl
     }
+    @Singleton
+    @Provides
+    fun provideConnectionRepository(localConnectionRepositoryImpl: LocalConnectionRepositoryImpl): LocalConnectionRepository {
+        return localConnectionRepositoryImpl
+    }
+
+//    @Singleton
+//    @Provides
+//    fun provideLocalConnectionRepository(connectionDao: ConnectionDao) : LocalConnectionRepository {
+//        return LocalConnectionRepositoryImpl(connectionDao = connectionDao)
+//    }
 
 }
 

@@ -57,20 +57,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             )
         }
         tvGoToReg.setOnClickListener {
-            viewModel.navigateToRegister()
+            viewModel.navigationEvent(LoginNavigationEvent.NavigateToRegister)
         }
     }
 
-    private fun logInState(logInState: AuthState) {
-        with(binding) {
-            progressBar.visibility =
-                if (logInState.isLoading) View.VISIBLE else View.GONE
+    private fun logInState(logInState: AuthState) = with(binding) {
 
-            logInState.errorMessage?.let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                viewModel.onEvent(OnEvent.ResetErrorMessage)
-            }
+        progressBar.visibility =
+            if (logInState.isLoading) View.VISIBLE else View.GONE
+
+        logInState.errorMessage?.let {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            viewModel.onEvent(OnEvent.ResetErrorMessage)
         }
+
     }
 
     private fun navigationEvents(event: LoginNavigationEvent) {

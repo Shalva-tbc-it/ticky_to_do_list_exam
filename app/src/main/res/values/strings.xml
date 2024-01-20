@@ -9,4 +9,13 @@
     <string name="registration">Registration</string>
     <string name="email">Email</string>
     <string name="repeat_password">Repeat Password</string>
+    <string name="add_some_tasks_don_t_make_me_bored">Add some tasks, don’t make me bored</string>
+    <string name="back">Back</string>
+    <string name="type_yout_task_here">Type yout task here</string>
+    <string name="stuff_to_do">Stuff to do?</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_task">Add Task</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>

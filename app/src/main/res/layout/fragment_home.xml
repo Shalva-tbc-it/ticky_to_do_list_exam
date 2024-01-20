@@ -3,36 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="@color/main_bg"
     tools:context=".presentation.screen.home.HomeFragment">
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Send" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvFirst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="default1"
-        android:textSize="20sp" />
+        android:text="@string/add_task" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/home_bitmap"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCatText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/add_some_tasks_don_t_make_me_bored"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
