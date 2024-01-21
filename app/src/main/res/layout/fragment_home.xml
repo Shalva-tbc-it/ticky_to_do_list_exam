@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,27 +9,69 @@
     android:padding="15dp"
     tools:context=".presentation.screen.home.HomeFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSend"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/add_task" />
+        android:paddingTop="15dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="@drawable/header_radius"
+        android:paddingBottom="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCurrentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="20.02"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSend"
+            android:layout_width="130dp"
+            android:layout_height="55dp"
+            android:backgroundTintMode="multiply"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="@string/add_task"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCurrentDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvCurrentDate" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTask"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:src="@drawable/home_bitmap"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCatText"
@@ -38,10 +81,12 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntu_bold"
         android:text="@string/add_some_tasks_don_t_make_me_bored"
+        app:layout_constraintTop_toBottomOf="@id/imgCat"
+        app:layout_constraintStart_toStartOf="@id/imgCat"
+        app:layout_constraintEnd_toEndOf="@id/imgCat"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:visibility="gone" />
 
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

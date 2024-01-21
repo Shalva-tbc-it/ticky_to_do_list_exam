@@ -2,7 +2,7 @@ package com.example.tickytodolist.data.remote.repository
 
 import com.example.tickytodolist.data.common.HandleFirebaseResponse
 import com.example.tickytodolist.data.common.Resource
-import com.example.tickytodolist.domain.repository.AuthRepository
+import com.example.tickytodolist.domain.repository.remote.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow

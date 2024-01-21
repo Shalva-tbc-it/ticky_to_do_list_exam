@@ -5,11 +5,11 @@ import com.example.tickytodolist.data.remote.repository.AuthRepositoryImpl
 import com.example.tickytodolist.data.remote.repository.FirebaseTaskRepositoryImpl
 import com.example.tickytodolist.data.remote.repository.GetTaskRepositoryImpl
 import com.example.tickytodolist.data.remote.repository.InteractionRepositoryImpl
-import com.example.tickytodolist.domain.repository.AuthRepository
-import com.example.tickytodolist.domain.repository.GetTaskRepository
-import com.example.tickytodolist.domain.repository.InteractionRepository
-import com.example.tickytodolist.domain.repository.TaskRepository
 import com.example.tickytodolist.domain.repository.local.LocalConnectionRepository
+import com.example.tickytodolist.domain.repository.remote.AuthRepository
+import com.example.tickytodolist.domain.repository.remote.GetTaskRepository
+import com.example.tickytodolist.domain.repository.remote.InteractionRepository
+import com.example.tickytodolist.domain.repository.remote.TaskRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,11 +49,6 @@ object RepositoryModule {
         return localConnectionRepositoryImpl
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideLocalConnectionRepository(connectionDao: ConnectionDao) : LocalConnectionRepository {
-//        return LocalConnectionRepositoryImpl(connectionDao = connectionDao)
-//    }
 
 }
 

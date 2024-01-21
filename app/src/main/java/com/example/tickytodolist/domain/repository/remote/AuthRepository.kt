@@ -1,4 +1,4 @@
-package com.example.tickytodolist.domain.repository
+package com.example.tickytodolist.domain.repository.remote
 
 import com.example.tickytodolist.data.common.Resource
 import com.google.firebase.auth.FirebaseUser

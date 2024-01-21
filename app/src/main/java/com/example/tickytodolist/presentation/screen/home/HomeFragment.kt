@@ -6,20 +6,27 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tickytodolist.databinding.FragmentHomeBinding
 import com.example.tickytodolist.presentation.common.base.BaseFragment
 import com.example.tickytodolist.presentation.screen.home.adapter.ToDoRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: ToDoRecyclerAdapter
+    private val args: HomeFragmentArgs by navArgs()
+    private val date = SimpleDateFormat(" dd MMM yyyy ")
+
     override fun bind() {
         bindAdapter()
+        binding.tvCurrentDate.text = date.format(Date())
     }
 
     override fun bindViewActionListeners() {
@@ -29,6 +36,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun bindObserves() {
+        if (args.internet) {
+            viewModel.deleteAllFromRoomDb()
+            viewModel.getFromFirebase()
+        } else {
+            viewModel.getFromRoomDb()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.tasks.collect {
@@ -66,12 +80,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun adapterListener() {
-        adapter.setOnItemClickListener (
+        adapter.setOnItemClickListener(
             listener = {
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToUpdateDeleteFragment(
-                        it.id,
-                        it.userId
+                        id = it.title,
+                        userId = it.userId
                     )
                 )
             }

@@ -1,8 +1,8 @@
 package com.example.tickytodolist.presentation.screen.splash
 
-import androidx.lifecycle.Lifecycle
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tickytodolist.databinding.FragmentSplashBinding
 import com.example.tickytodolist.presentation.common.base.BaseFragment
@@ -13,18 +13,16 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
+
+    private val viewModel: SplashViewModel by viewModels()
     override fun bind() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                delay(1000)
-                findNavController().navigate(
-                    SplashFragmentDirections.actionSplashFragmentToLoginFragment()
-                )
-            }
-
+            delay(1000)
+            splash()
         }
 
     }
+
 
     override fun bindViewActionListeners() {
 
@@ -33,5 +31,38 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     override fun bindObserves() {
 
     }
+
+    private fun splash() {
+        if (viewModel.isInternetAvailable(requireContext())) {
+            Toast.makeText(requireContext(), "Success Internet", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(
+                SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+            )
+        } else {
+            Toast.makeText(requireContext(), "Error Internet", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(
+                SplashFragmentDirections.actionSplashFragmentToHomeFragment(
+                    false
+                )
+            )
+        }
+    }
+
+//    private fun navigationEvent(event: SplashNavigationEvent) {
+//        when (event) {
+//            is SplashNavigationEvent.NavigateToLogin -> {
+//                findNavController().navigate(
+//                    SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+//                )
+//            }
+//            is SplashNavigationEvent.NavigateToHome -> {
+//                findNavController().navigate(
+//                    SplashFragmentDirections.actionSplashFragmentToHomeFragment(
+//                        false
+//                    )
+//                )
+//            }
+//        }
+//    }
 
 }

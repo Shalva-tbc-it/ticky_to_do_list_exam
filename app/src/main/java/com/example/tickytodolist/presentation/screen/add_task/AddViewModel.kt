@@ -3,9 +3,13 @@ package com.example.tickytodolist.presentation.screen.add_task
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tickytodolist.data.remote.model.TaskDTO
-import com.example.tickytodolist.domain.usecase.home.AddTaskUseCase
+import com.example.tickytodolist.domain.usecase.home.local.GetTaskConnectionUseCase
+import com.example.tickytodolist.domain.usecase.home.local.InsertTaskUseCase
+import com.example.tickytodolist.domain.usecase.home.remote.AddTaskUseCase
 import com.example.tickytodolist.presentation.event.add_task.AddTaskNavigationEvent
+import com.example.tickytodolist.presentation.mapper.toDomain
+import com.example.tickytodolist.presentation.mapper.toGetTaskDomain
+import com.example.tickytodolist.presentation.model.Task
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,6 +22,8 @@ import javax.inject.Inject
 class AddViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val addTaskUseCase: AddTaskUseCase,
+    private val getTaskConnectionUseCase: GetTaskConnectionUseCase,
+    private val insertTaskUseCase: InsertTaskUseCase
 ) : ViewModel() {
 
     private val userId = "${firebaseAuth.currentUser?.uid}"
@@ -50,8 +56,9 @@ class AddViewModel @Inject constructor(
 
     fun addTask(title: String) {
         viewModelScope.launch {
-            val task = TaskDTO(id = "${UUID.randomUUID()}", userId = userId, title = title, date = date)
-            addTaskUseCase(task)
+            val task = Task(id = "${UUID.randomUUID()}", userId = userId, title = title, date = date)
+            addTaskUseCase(task.toGetTaskDomain())
+            insertTaskUseCase.invoke(task.toDomain())
         }
     }
 

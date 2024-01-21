@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LocalConnectionRepositoryImpl @Inject constructor(
-    private val connectionDao: ConnectionDao
+    private val connectionDao: ConnectionDao,
 ): LocalConnectionRepository {
 
     override suspend fun getAll(): Flow<List<GetConnection>> {
@@ -21,8 +21,16 @@ class LocalConnectionRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun insertAll(task: GetConnection) {
-        connectionDao.insertItem(task.toToDataLayer())
+    override suspend fun insertOrUpdateTask(getConnection: List<String>) {
+        connectionDao.deleteTaskByTaskName(getConnection)
+    }
+
+    override suspend fun insertAll(getConnection: GetConnection) {
+        connectionDao.insertItem(getConnection.toToDataLayer())
+    }
+
+    override suspend fun deleteAll() {
+        connectionDao.deleteAll()
     }
 
 }

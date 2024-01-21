@@ -1,7 +1,7 @@
-package com.example.tickytodolist.domain.usecase.update_delete
+package com.example.tickytodolist.domain.usecase.update_delete.remote
 
 import com.example.tickytodolist.data.remote.model.TaskDTO
-import com.example.tickytodolist.domain.repository.InteractionRepository
+import com.example.tickytodolist.domain.repository.remote.InteractionRepository
 import javax.inject.Inject
 
 class GetItemByIdUseCase @Inject constructor(

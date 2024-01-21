@@ -83,7 +83,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>(FragmentAddBinding::inflate
                 viewModel.onDateSelected(year, month + 1, dayOfMonth)
                 binding.imgIcDatePicker.visibility = View.GONE
                 binding.tvDatePicker.visibility = View.VISIBLE
-                " $dayOfMonth/${month + 1}/$year ".also { binding.tvDatePicker.text = it }
+                "$dayOfMonth/${month + 1}/$year ".also { binding.tvDatePicker.text = it }
                 // You can also update the UI or perform other actions after selecting a date
             }
         })

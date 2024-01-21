@@ -13,6 +13,14 @@ interface ConnectionDao {
     @Query("SELECT * FROM tasks")
     fun getAll() : Flow<List<ConnectionEntity>>
 
+    @Query("DELETE FROM tasks")
+    suspend fun deleteAll()
+
+    @Query("DELETE FROM tasks WHERE taks = (:task)")
+    suspend fun deleteTaskByTaskName(task: List<String>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTask(getConnection: ConnectionEntity)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertItem(connectionEntity: ConnectionEntity)
 

@@ -6,10 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.tickytodolist.data.remote.model.TaskDTO
 import com.example.tickytodolist.databinding.FragmentUpdateDeleteBinding
 import com.example.tickytodolist.presentation.common.base.BaseFragment
-import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -41,28 +39,32 @@ class UpdateDeleteFragment : BaseFragment<FragmentUpdateDeleteBinding>(FragmentU
 
     private fun listener() = with(binding) {
         btnDelete.setOnClickListener {
-//            viewModel.deleteItem(args.id)
-            val db = FirebaseDatabase.getInstance().getReference("users").child("8c1a2f5c-a4a7-486d-89cd-9c0dcac10ac8")
-            val mTask = db.removeValue()
+            viewModel.deleteFromRoomDb(listOf(args.id))
 
-            mTask.addOnSuccessListener {
-                findNavController().navigate(
-                    UpdateDeleteFragmentDirections.actionUpdateDeleteFragmentToHomeFragment()
-                )
-            }
+            findNavController().navigate(
+                    UpdateDeleteFragmentDirections.actionUpdateDeleteFragmentToHomeFragment())
+
+        //            viewModel.deleteItem(args.id)
+//            val db = FirebaseDatabase.getInstance().getReference("users").child("8c1a2f5c-a4a7-486d-89cd-9c0dcac10ac8")
+//            val mTask = db.removeValue()
+//            mTask.addOnSuccessListener {
+//
+//                )
+//            }
 
         }
-        btnUpdate.setOnClickListener {
-            viewModel.updateItem(
-                userId = args.userId,
-                id = args.id,
-                item = TaskDTO(
-                    id = args.id,
-                    title = edTask.text.toString(),
-                    date = "111"
-                )
-            )
-        }
+//        btnUpdate.setOnClickListener {
+//            viewModel.updateItem(
+//                userId = args.userId,
+//                id = args.id,
+//                item = Task(
+//                    id = args.id,
+//                    title = edTask.text.toString(),
+//                    date = "111",
+//                    userId = args.userId,
+//                )
+//            )
+//        }
 
     }
 

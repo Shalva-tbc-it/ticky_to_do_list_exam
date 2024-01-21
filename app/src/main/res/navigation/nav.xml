@@ -52,6 +52,10 @@
         <action
             android:id="@+id/action_homeFragment_to_updateDeleteFragment"
             app:destination="@id/updateDeleteFragment" />
+        <argument
+            android:name="internet"
+            app:argType="boolean"
+            android:defaultValue="true" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
