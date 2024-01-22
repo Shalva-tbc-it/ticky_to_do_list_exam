@@ -1,5 +1,6 @@
 package com.example.tickytodolist.presentation.screen.update_delete
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -9,11 +10,11 @@ import androidx.navigation.fragment.navArgs
 import com.example.tickytodolist.databinding.FragmentUpdateDeleteBinding
 import com.example.tickytodolist.presentation.common.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class UpdateDeleteFragment : BaseFragment<FragmentUpdateDeleteBinding>(FragmentUpdateDeleteBinding::inflate) {
+class UpdateDeleteFragment :
+    BaseFragment<FragmentUpdateDeleteBinding>(FragmentUpdateDeleteBinding::inflate) {
 
     private val viewModel: UpdateDeleteViewModel by viewModels()
     private val args: UpdateDeleteFragmentArgs by navArgs()
@@ -27,10 +28,17 @@ class UpdateDeleteFragment : BaseFragment<FragmentUpdateDeleteBinding>(FragmentU
 
     override fun bindObserves() {
 
-        viewLifecycleOwner.lifecycleScope.launch {
+
+        viewLifecycleOwner.lifecycleScope.launch{
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.itemStateFlow.collectLatest {
+                viewModel.getCurrentTask(args.id)
+                viewModel.itemStateFlow.collect {
                     binding.edTask.setText(it.title)
+                    if (it.date.isNotBlank()) {
+                        binding.imgIcDatePicker.visibility = View.GONE
+                        binding.tvDatePicker.visibility = View.VISIBLE
+                        binding.tvDatePicker.text = it.date
+                    }
                 }
             }
         }
@@ -40,33 +48,16 @@ class UpdateDeleteFragment : BaseFragment<FragmentUpdateDeleteBinding>(FragmentU
     private fun listener() = with(binding) {
         btnDelete.setOnClickListener {
             viewModel.deleteFromRoomDb(listOf(args.id))
-
             findNavController().navigate(
-                    UpdateDeleteFragmentDirections.actionUpdateDeleteFragmentToHomeFragment())
+                UpdateDeleteFragmentDirections.actionUpdateDeleteFragmentToHomeFragment()
+            )
+        }
 
-        //            viewModel.deleteItem(args.id)
-//            val db = FirebaseDatabase.getInstance().getReference("users").child("8c1a2f5c-a4a7-486d-89cd-9c0dcac10ac8")
-//            val mTask = db.removeValue()
-//            mTask.addOnSuccessListener {
-//
-//                )
-//            }
+        btnUpdate.setOnClickListener {
 
         }
-//        btnUpdate.setOnClickListener {
-//            viewModel.updateItem(
-//                userId = args.userId,
-//                id = args.id,
-//                item = Task(
-//                    id = args.id,
-//                    title = edTask.text.toString(),
-//                    date = "111",
-//                    userId = args.userId,
-//                )
-//            )
-//        }
-
     }
+
 
 
 }

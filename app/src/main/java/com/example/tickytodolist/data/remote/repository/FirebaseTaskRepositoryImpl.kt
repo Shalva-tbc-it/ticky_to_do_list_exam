@@ -5,7 +5,6 @@ import com.example.tickytodolist.domain.repository.remote.TaskRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.tasks.await
-import java.util.UUID
 import javax.inject.Inject
 
 class FirebaseTaskRepositoryImpl @Inject constructor(
@@ -18,7 +17,7 @@ class FirebaseTaskRepositoryImpl @Inject constructor(
         val userId = currentUser?.uid ?: throw Exception("User not authenticated")
 
         val newTaskRef = tasksReference.child("users").push()
-        newTaskRef.setValue(task.copy(id = "${UUID.randomUUID()}", userId = userId)).await()
+        newTaskRef.setValue(task.copy(userId = userId)).await()
         return newTaskRef.key ?: ""
     }
 }

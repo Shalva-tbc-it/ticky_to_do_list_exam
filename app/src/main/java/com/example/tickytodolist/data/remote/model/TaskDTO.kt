@@ -1,7 +1,7 @@
 package com.example.tickytodolist.data.remote.model
 
 data class TaskDTO(
-    val id: String = "",
+    val id: Int,
     val userId: String = "",
     val title: String = "",
     val date: String = ""

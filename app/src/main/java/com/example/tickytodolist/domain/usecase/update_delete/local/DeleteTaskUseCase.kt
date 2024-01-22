@@ -7,7 +7,7 @@ class DeleteTaskUseCase @Inject constructor(
     private val repository: LocalConnectionRepository
 ) {
 
-    suspend operator fun invoke(task: List<String>) = repository.insertOrUpdateTask(getConnection = task)
+    suspend operator fun invoke(task: List<Int>) = repository.insertOrUpdateTask(getConnection = task)
 //    fun mapTaskToDomain(getConnection: GetConnection): Task {
 //        return getConnection.toPresentation()
 //    }

@@ -37,8 +37,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun bindObserves() {
         if (args.internet) {
-            viewModel.deleteAllFromRoomDb()
-            viewModel.getFromFirebase()
+//            viewModel.deleteAllFromRoomDb()
+//            viewModel.getFromFirebase()
+            viewModel.getFromRoomDb()
         } else {
             viewModel.getFromRoomDb()
         }
@@ -84,7 +85,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             listener = {
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToUpdateDeleteFragment(
-                        id = it.title,
+                        id = it.id!!,
                         userId = it.userId
                     )
                 )

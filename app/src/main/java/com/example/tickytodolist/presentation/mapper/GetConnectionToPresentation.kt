@@ -5,7 +5,7 @@ import com.example.tickytodolist.presentation.model.Task
 
 fun GetConnection.toPresentation() =
     Task(
-        id = id.toString(),
+        id = id!!.toInt(),
         userId = userId!!,
         title = task!!,
         date = date ?: "",

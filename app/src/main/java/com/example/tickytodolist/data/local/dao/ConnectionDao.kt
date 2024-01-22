@@ -16,10 +16,14 @@ interface ConnectionDao {
     @Query("DELETE FROM tasks")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM tasks WHERE taks = (:task)")
-    suspend fun deleteTaskByTaskName(task: List<String>)
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTask(getConnection: ConnectionEntity)
+    @Query("DELETE FROM tasks WHERE id = (:task)")
+    suspend fun deleteTaskByTaskName(task: List<Int>)
+
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    suspend fun getCurrentTask(id: Int): ConnectionEntity
+
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertTask(getConnection: ConnectionEntity)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertItem(connectionEntity: ConnectionEntity)
