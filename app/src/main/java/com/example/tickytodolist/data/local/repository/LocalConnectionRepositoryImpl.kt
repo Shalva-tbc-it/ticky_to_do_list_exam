@@ -3,8 +3,8 @@ package com.example.tickytodolist.data.local.repository
 import com.example.tickytodolist.data.local.dao.ConnectionDao
 import com.example.tickytodolist.data.local.mapper.toDomain
 import com.example.tickytodolist.data.local.mapper.toToDataLayer
-import com.example.tickytodolist.domain.model.local.GetConnection
-import com.example.tickytodolist.domain.repository.local.LocalConnectionRepository
+import com.example.tickytodolist.domain.model.GetConnection
+import com.example.tickytodolist.domain.repository.LocalConnectionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -29,8 +29,8 @@ class LocalConnectionRepositoryImpl @Inject constructor(
         return connectionDao.getCurrentTask(id = id).toDomain()
     }
 
-    override suspend fun insertOrUpdateTask(getConnection: List<Int>) {
-        connectionDao.deleteTaskByTaskName(getConnection)
+    override suspend fun deleteTaskById(getConnection: List<Int>) {
+        connectionDao.deleteTaskById(getConnection)
     }
 
 

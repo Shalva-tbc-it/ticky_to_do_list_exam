@@ -81,13 +81,6 @@ class RegistrationFragment :
         when (event) {
             is RegNavigationEvent.NavigateToLogin -> {
                 Toast.makeText(requireContext(), "Registration Success", Toast.LENGTH_SHORT).show()
-
-//                findNavController().navigate(
-//                    RegisterFragmentDirections.actionRegisterFragmentToLogInFragment(
-//                        email = event.email,
-//                        password = event.password
-//                    )
-//                )
             }
 
             is RegNavigationEvent.AlreadyHaveAccountNavigation -> {

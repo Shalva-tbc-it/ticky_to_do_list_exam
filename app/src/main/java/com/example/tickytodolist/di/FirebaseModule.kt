@@ -32,6 +32,4 @@ object FirebaseModule {
     }
 
 
-
-
 }

@@ -33,13 +33,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun bindViewActionListeners() {
         listener()
         adapterListener()
-
     }
 
     override fun bindObserves() {
         if (args.internet) {
-//            viewModel.deleteAllFromRoomDb()
-//            viewModel.getFromFirebase()
             viewModel.getFromRoomDb()
         } else {
             viewModel.getFromRoomDb()
@@ -61,15 +58,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
                 }
             }
-
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiEvent.collect {
                     navigationEvents(it)
                 }
             }
-
         }
 
 
@@ -82,12 +78,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     }
 
+
+
     private fun listener() = with(binding) {
         btnSend.setOnClickListener {
             viewModel.navigationEvent(HomeNavigationEvent.NavigateToAdd)
-//            findNavController().navigate(
-//                HomeFragmentDirections.actionHomeFragmentToAddFragment()
-//            )
         }
     }
 

@@ -1,6 +1,6 @@
-package com.example.tickytodolist.domain.usecase.update_delete.local
+package com.example.tickytodolist.domain.usecase.update_delete
 
-import com.example.tickytodolist.domain.repository.local.LocalConnectionRepository
+import com.example.tickytodolist.domain.repository.LocalConnectionRepository
 import javax.inject.Inject
 
 class GetTaskUseCase @Inject constructor(

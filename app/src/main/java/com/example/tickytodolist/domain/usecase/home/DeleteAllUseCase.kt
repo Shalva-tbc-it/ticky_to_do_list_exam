@@ -1,6 +1,6 @@
-package com.example.tickytodolist.domain.usecase.home.local
+package com.example.tickytodolist.domain.usecase.home
 
-import com.example.tickytodolist.domain.repository.local.LocalConnectionRepository
+import com.example.tickytodolist.domain.repository.LocalConnectionRepository
 import javax.inject.Inject
 
 class DeleteAllUseCase @Inject constructor(

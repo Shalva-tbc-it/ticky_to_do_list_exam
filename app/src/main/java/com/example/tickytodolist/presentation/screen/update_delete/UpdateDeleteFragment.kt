@@ -88,12 +88,10 @@ class UpdateDeleteFragment :
     private fun showDatePicker() {
         val datePicker = DatePicker(object : DataSelected {
             override fun receiveDate(year: Int, month: Int, dayOfMonth: Int) {
-                // Call date handling methods in your ViewModel
                 viewModel.onDateSelected(year, month + 1, dayOfMonth)
                 binding.imgIcDatePicker.visibility = View.GONE
                 binding.tvDatePicker.visibility = View.VISIBLE
                 "$dayOfMonth/${month + 1}/$year ".also { binding.tvDatePicker.text = it }
-                // You can also update the UI or perform other actions after selecting a date
             }
         })
         datePicker.show(childFragmentManager, "datePicker")

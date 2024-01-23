@@ -1,7 +1,7 @@
-package com.example.tickytodolist.domain.usecase.home.local
+package com.example.tickytodolist.domain.usecase.home
 
-import com.example.tickytodolist.domain.model.local.GetConnection
-import com.example.tickytodolist.domain.repository.local.LocalConnectionRepository
+import com.example.tickytodolist.domain.model.GetConnection
+import com.example.tickytodolist.domain.repository.LocalConnectionRepository
 import javax.inject.Inject
 
 class InsertTaskUseCase @Inject constructor(

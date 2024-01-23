@@ -2,10 +2,7 @@ package com.example.tickytodolist.presentation.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tickytodolist.domain.usecase.home.local.DeleteAllUseCase
-import com.example.tickytodolist.domain.usecase.home.local.GetTaskConnectionUseCase
-import com.example.tickytodolist.domain.usecase.home.local.InsertTaskUseCase
-import com.example.tickytodolist.domain.usecase.home.remote.GetTasksUseCase
+import com.example.tickytodolist.domain.usecase.home.GetTaskConnectionUseCase
 import com.example.tickytodolist.presentation.event.home.HomeNavigationEvent
 import com.example.tickytodolist.presentation.mapper.toPresentation
 import com.example.tickytodolist.presentation.model.Task
@@ -19,10 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getTasksUseCase: GetTasksUseCase,
     private val getTaskConnectionUseCase: GetTaskConnectionUseCase,
-    private val insertTaskUseCase: InsertTaskUseCase,
-    private val deleteAllUseCase: DeleteAllUseCase
 ) : ViewModel() {
 
     private val _tasks = MutableStateFlow<List<Task>>(emptyList())
@@ -37,38 +31,6 @@ class HomeViewModel @Inject constructor(
             is HomeNavigationEvent.NavigateToUpdateDelete -> navigateToUpdateDelete()
         }
     }
-
-//    private val eventListener = object : ValueEventListener {
-//        override fun onDataChange(snapshot: DataSnapshot) {
-//            val tasks = mutableListOf<Task>()
-//            if (snapshot.exists()) {
-//                for (snap in snapshot.children) {
-//                    val data = snap.getValue(GetTask::class.java)
-//                    data?.let {
-//                        tasks.add(it.toPresentation())
-//                    }
-//                    e("getDataGetData", "${data?.title}")
-//                }
-//                _tasks.value = tasks
-//            }
-//        }
-//
-//        override fun onCancelled(error: DatabaseError) {
-//            e("getDataGetData", " error: $error")
-//        }
-//    }
-
-//    fun deleteAllFromRoomDb() {
-//        viewModelScope.launch {
-//            deleteAllUseCase.invoke()
-//        }
-//    }
-//    fun getFromFirebase() {
-//        viewModelScope.launch {
-//            getTasksUseCase.execute(listener = eventListener)
-//            addLocalDB()
-//        }
-//    }
 
     private fun navigateToAdd() {
         viewModelScope.launch {
@@ -93,22 +55,6 @@ class HomeViewModel @Inject constructor(
         }
 
     }
-
-//    private fun addLocalDB() {
-//        viewModelScope.launch {
-//            _tasks.collect {
-//                it.map { data ->
-//                    insertTaskUseCase.invoke(
-//                        GetConnection(
-//                            userId = data.userId,
-//                            task = data.title,
-//                            date = data.date
-//                        )
-//                    )
-//                }
-//            }
-//        }
-//    }
 
 
 }

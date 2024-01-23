@@ -18,7 +18,7 @@ interface ConnectionDao {
     suspend fun deleteAll()
 
     @Query("DELETE FROM tasks WHERE id = (:task)")
-    suspend fun deleteTaskByTaskName(task: List<Int>)
+    suspend fun deleteTaskById(task: List<Int>)
 
     @Query("SELECT * FROM tasks WHERE id = :id")
     suspend fun getCurrentTask(id: Int): ConnectionEntity

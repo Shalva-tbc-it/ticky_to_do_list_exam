@@ -1,8 +1,7 @@
-package com.example.tickytodolist.presentation
+package com.example.tickytodolist.presentation.screen
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.tickytodolist.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tickytodolist.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,4 +14,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
+
+
 }
