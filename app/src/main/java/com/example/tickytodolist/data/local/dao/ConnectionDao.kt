@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.tickytodolist.data.local.entity.ConnectionEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -22,8 +23,8 @@ interface ConnectionDao {
     @Query("SELECT * FROM tasks WHERE id = :id")
     suspend fun getCurrentTask(id: Int): ConnectionEntity
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertTask(getConnection: ConnectionEntity)
+    @Update
+    suspend fun updateTask(connectionEntity: ConnectionEntity)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertItem(connectionEntity: ConnectionEntity)

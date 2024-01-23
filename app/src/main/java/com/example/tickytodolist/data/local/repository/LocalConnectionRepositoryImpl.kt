@@ -21,6 +21,10 @@ class LocalConnectionRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateTask(getConnection: GetConnection) {
+        return connectionDao.updateTask(getConnection.toToDataLayer())
+    }
+
     override suspend fun getCurrentTask(id : Int): GetConnection {
         return connectionDao.getCurrentTask(id = id).toDomain()
     }
@@ -28,6 +32,8 @@ class LocalConnectionRepositoryImpl @Inject constructor(
     override suspend fun insertOrUpdateTask(getConnection: List<Int>) {
         connectionDao.deleteTaskByTaskName(getConnection)
     }
+
+
 
     override suspend fun insertAll(getConnection: GetConnection) {
         connectionDao.insertItem(getConnection.toToDataLayer())

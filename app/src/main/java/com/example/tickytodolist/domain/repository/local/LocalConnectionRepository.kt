@@ -8,7 +8,7 @@ interface LocalConnectionRepository {
 
     suspend fun insertOrUpdateTask(getConnection: List<Int>)
     suspend fun getAll() : Flow<List<GetConnection>>
-
+    suspend fun updateTask(getConnection: GetConnection)
     suspend fun getCurrentTask(id: Int): GetConnection
     suspend fun insertAll(task: GetConnection)
     suspend fun deleteAll()

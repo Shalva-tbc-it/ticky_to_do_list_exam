@@ -6,10 +6,13 @@ import com.example.tickytodolist.domain.usecase.home.local.DeleteAllUseCase
 import com.example.tickytodolist.domain.usecase.home.local.GetTaskConnectionUseCase
 import com.example.tickytodolist.domain.usecase.home.local.InsertTaskUseCase
 import com.example.tickytodolist.domain.usecase.home.remote.GetTasksUseCase
+import com.example.tickytodolist.presentation.event.home.HomeNavigationEvent
 import com.example.tickytodolist.presentation.mapper.toPresentation
 import com.example.tickytodolist.presentation.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +27,17 @@ class HomeViewModel @Inject constructor(
 
     private val _tasks = MutableStateFlow<List<Task>>(emptyList())
     val tasks: StateFlow<List<Task>> get() = _tasks
+
+    private val _uiEvent = MutableSharedFlow<HomeNavigationEvent>()
+    val uiEvent: SharedFlow<HomeNavigationEvent> get() = _uiEvent
+
+    fun navigationEvent(event: HomeNavigationEvent) {
+        when (event) {
+            is HomeNavigationEvent.NavigateToAdd -> navigateToAdd()
+            is HomeNavigationEvent.NavigateToUpdateDelete -> navigateToUpdateDelete()
+        }
+    }
+
 //    private val eventListener = object : ValueEventListener {
 //        override fun onDataChange(snapshot: DataSnapshot) {
 //            val tasks = mutableListOf<Task>()
@@ -55,6 +69,19 @@ class HomeViewModel @Inject constructor(
 //            addLocalDB()
 //        }
 //    }
+
+    private fun navigateToAdd() {
+        viewModelScope.launch {
+            _uiEvent.emit(HomeNavigationEvent.NavigateToAdd)
+        }
+    }
+
+    private fun navigateToUpdateDelete() {
+        viewModelScope.launch {
+            _uiEvent.emit(HomeNavigationEvent.NavigateToUpdateDelete)
+        }
+    }
+
 
     fun getFromRoomDb() {
         viewModelScope.launch {

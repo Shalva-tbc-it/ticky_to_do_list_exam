@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tickytodolist.databinding.FragmentHomeBinding
 import com.example.tickytodolist.presentation.common.base.BaseFragment
+import com.example.tickytodolist.presentation.event.home.HomeNavigationEvent
 import com.example.tickytodolist.presentation.screen.home.adapter.ToDoRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -62,6 +63,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiEvent.collect {
+                    navigationEvents(it)
+                }
+            }
+
+        }
+
 
     }
 
@@ -74,9 +84,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun listener() = with(binding) {
         btnSend.setOnClickListener {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToAddFragment()
-            )
+            viewModel.navigationEvent(HomeNavigationEvent.NavigateToAdd)
+//            findNavController().navigate(
+//                HomeFragmentDirections.actionHomeFragmentToAddFragment()
+//            )
         }
     }
 
@@ -91,6 +102,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 )
             }
         )
+    }
+
+    private fun navigationEvents(event: HomeNavigationEvent) {
+        when (event) {
+            is HomeNavigationEvent.NavigateToAdd -> {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToAddFragment()
+                )
+            }
+
+            is HomeNavigationEvent.NavigateToUpdateDelete -> {
+
+            }
+        }
     }
 
 }
