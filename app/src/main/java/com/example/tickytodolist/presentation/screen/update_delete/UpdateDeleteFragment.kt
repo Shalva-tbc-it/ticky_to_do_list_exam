@@ -60,14 +60,12 @@ class UpdateDeleteFragment :
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.updateCurrentTask(
-                        args.id.let {
-                            Task(
-                                id = args.id,
-                                userId = args.userId,
-                                title = binding.edTask.text.toString(),
-                                date = binding.tvDatePicker.text.toString().ifBlank { "" }
-                            )
-                        }
+                        Task(
+                            id = args.id,
+                            userId = args.userId,
+                            title = binding.edTask.text.toString(),
+                            date = binding.tvDatePicker.text.toString().ifBlank { "" }
+                        )
                         )
                 }
             }
@@ -91,7 +89,7 @@ class UpdateDeleteFragment :
                 viewModel.onDateSelected(year, month + 1, dayOfMonth)
                 binding.imgIcDatePicker.visibility = View.GONE
                 binding.tvDatePicker.visibility = View.VISIBLE
-                "$dayOfMonth/${month + 1}/$year ".also { binding.tvDatePicker.text = it }
+                "$dayOfMonth.${month + 1}.$year ".also { binding.tvDatePicker.text = it }
             }
         })
         datePicker.show(childFragmentManager, "datePicker")

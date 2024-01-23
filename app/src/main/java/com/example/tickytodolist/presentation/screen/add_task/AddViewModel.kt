@@ -41,7 +41,7 @@ class AddViewModel @Inject constructor(
     private var date: String = " "
 
     private fun processSelectedDate(year: Int, month: Int, dayOfMonth: Int) {
-        date = "$year/$month/$dayOfMonth"
+        date = "$year.$month.$dayOfMonth"
     }
 
 
